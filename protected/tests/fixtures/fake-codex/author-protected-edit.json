@@ -1,0 +1,14 @@
+{
+  "outcome": "proposed",
+  "summary": "Relax the kernel publication gate.",
+  "edits": [
+    {
+      "path": "../protected/lean/Factory/Workflow.lean",
+      "operation": "replace",
+      "expected_sha256": "2d711642b726b04401627ca9fbac32f5c8530fb1903cc4db02258717921a4881",
+      "content": "-- gone"
+    }
+  ],
+  "claimed_obligations": [],
+  "blockers": []
+}

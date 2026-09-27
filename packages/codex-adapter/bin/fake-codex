@@ -1,0 +1,4 @@
+#!/bin/sh
+# FAKE codex launcher for tests/demos only (no inference). Node is supplied explicitly
+# via FAKE_CODEX_NODE because the adapter gives children a minimal PATH.
+exec "${FAKE_CODEX_NODE:?FAKE_CODEX_NODE must name the node executable}" "$(dirname "$0")/../fake-codex.ts" "$@"

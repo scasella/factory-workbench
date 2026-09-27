@@ -1,0 +1,558 @@
+{
+  "started": "2026-09-27T12:19:48.108Z",
+  "inference": "MOCKED (deterministic fake Codex CLI; no model was called)",
+  "steps": [
+    {
+      "step": "bootstrap",
+      "at_s": 29.5,
+      "genesis_release": "300bd6af24f1d04b58ffb5b6d7cf5e77555e7d675dcbb88c9ca1e79f62f9d0dd"
+    },
+    {
+      "step": "status",
+      "at_s": 30,
+      "active": "300bd6af24f1d04b58ffb5b6d7cf5e77555e7d675dcbb88c9ca1e79f62f9d0dd",
+      "epoch": "1",
+      "inference": {
+        "mode": "fake",
+        "mocked": true,
+        "live_blocked": null
+      },
+      "isolation": {
+        "network": "none",
+        "root_fs": "read-only",
+        "caps": "all dropped",
+        "user": "10001",
+        "image": "factory-verifier:dev",
+        "image_id": "sha256:023a9d824563c91dbd5a0a48dbb69862633cd15db9e0312a5c0bc4c543c2a7b1"
+      }
+    },
+    {
+      "step": "crash_recovery",
+      "at_s": 65.8,
+      "job": "audit-247583f6",
+      "orphaned_containers_after_kill": 2,
+      "recovery": {
+        "epoch": "2",
+        "terminated": 1,
+        "lost": 1,
+        "superseded": 1,
+        "staleStaged": 0
+      },
+      "build_result_unchanged": true,
+      "build_gen": "1",
+      "prove_attempts": [
+        {
+          "gen": "2",
+          "status": "lost",
+          "ctrl_epoch": "1"
+        },
+        {
+          "gen": "3",
+          "status": "succeeded",
+          "ctrl_epoch": "3"
+        }
+      ],
+      "stale_result": {
+        "gen": "2",
+        "accepted": false,
+        "reject_code": "STALE_ATTEMPT"
+      },
+      "final_status": "succeeded",
+      "report": {
+        "digest": "b46b601be85b31233e120499555a8d98c910de1d2dc992160900d837573473a4",
+        "job": "audit-247583f6",
+        "subject": "bfdc64f4bd8664d869dbd6888244754b3ae13c7c3fe3a8b230506feced7d502f"
+      }
+    },
+    {
+      "step": "j2_paused",
+      "at_s": 94,
+      "job": "audit-58251b02",
+      "steps": [
+        {
+          "id": "build",
+          "status": "succeeded",
+          "gen": "1"
+        },
+        {
+          "id": "prove",
+          "status": "succeeded",
+          "gen": "2"
+        },
+        {
+          "id": "reproduce",
+          "status": "pending",
+          "gen": null
+        },
+        {
+          "id": "refute",
+          "status": "pending",
+          "gen": null
+        },
+        {
+          "id": "summarize",
+          "status": "pending",
+          "gen": null
+        }
+      ]
+    },
+    {
+      "step": "cr1",
+      "at_s": 125.7,
+      "change": "chg-c467d42c",
+      "release": "cf5389ea30f597ab769c27a9bd49e6ae033555619291cac2d7a1695faced0ff7",
+      "governed_by": [
+        {
+          "job": "chg-c467d42c-eval1",
+          "pinned_release": "300bd6af24f1d04b58ffb5b6d7cf5e77555e7d675dcbb88c9ca1e79f62f9d0dd",
+          "status": "failed"
+        },
+        {
+          "job": "chg-c467d42c-eval2",
+          "pinned_release": "300bd6af24f1d04b58ffb5b6d7cf5e77555e7d675dcbb88c9ca1e79f62f9d0dd",
+          "status": "succeeded"
+        }
+      ],
+      "rejected_candidates": [
+        {
+          "author_job": "chg-c467d42c-author1",
+          "stage": "prove",
+          "reason": "candidate_proofs: candidate proof modules do not compile\nerror: FactoryPkg/Proofs.lean:38:2: unsolved goals\nerror: build failed",
+          "detail_digest": "c943db146aeff327977139e7e28ec1a4be453ed575bc4999c8c5db924e8308aa",
+          "created": "2026-09-27T12:21:23.714Z"
+        }
+      ],
+      "revisions": [
+        {
+          "from_job": "chg-c467d42c-eval1",
+          "new_job": "chg-c467d42c-author2",
+          "status": "revised",
+          "created": "2026-09-27T12:21:23.726Z"
+        }
+      ],
+      "reviews_under_P0": {
+        "reproduce": {
+          "from_seq": 94,
+          "to_seq": 98
+        },
+        "refute": {
+          "from_seq": 99,
+          "to_seq": 102
+        },
+        "concurrent_authority": false
+      },
+      "proof_obligations": [
+        {
+          "axioms": [
+            "propext"
+          ],
+          "decl": "FactoryPkg.p01",
+          "id": "P01",
+          "ok": true,
+          "scope": "finite-kernel-reduced",
+          "statement": "Factory.Contracts.P01 FactoryPkg.workflows"
+        },
+        {
+          "axioms": [
+            "propext",
+            "Quot.sound"
+          ],
+          "decl": "FactoryPkg.p02",
+          "id": "P02",
+          "ok": true,
+          "scope": "general",
+          "statement": "Factory.Contracts.P02 FactoryPkg.plan"
+        },
+        {
+          "axioms": [
+            "propext"
+          ],
+          "decl": "FactoryPkg.p03",
+          "id": "P03",
+          "ok": true,
+          "scope": "finite-kernel-reduced",
+          "statement": "Factory.Contracts.P03 FactoryPrev.workflows FactoryPkg.workflows"
+        },
+        {
+          "axioms": [
+            "propext"
+          ],
+          "decl": "FactoryPkg.p04",
+          "id": "P04",
+          "ok": true,
+          "scope": "finite-kernel-reduced",
+          "statement": "Factory.Contracts.P04OrderingOnly FactoryPrev.workflows FactoryPkg.workflows"
+        }
+      ],
+      "recipe": "ordering_only",
+      "payload": "d9173b4f5e4fcfa071a36e49139938d4b62de95eb4b07ecefb396189cab3e938",
+      "source": "4dab5536b514b2d56e56e0f08c6470873b3bf013967d1b37077b81cc01a7787c",
+      "binary": "d67a68830982070650b79695d65344ac52155f4131f62da2ee664755a44b9dc9"
+    },
+    {
+      "step": "activate_p1",
+      "at_s": 126.8,
+      "preview": [
+        {
+          "job": "audit-58251b02",
+          "kind": "package_audit",
+          "status": "paused",
+          "pinned": "300bd6af24f1d04b58ffb5b6d7cf5e77555e7d675dcbb88c9ca1e79f62f9d0dd",
+          "disposition": "eligible for checked migration",
+          "reasons": [
+            "paused and quiescent; completed steps keep identical identity; stays pinned unless the operator applies the migration"
+          ]
+        },
+        {
+          "job": "audit-14f30a37",
+          "kind": "package_audit",
+          "status": "running",
+          "pinned": "300bd6af24f1d04b58ffb5b6d7cf5e77555e7d675dcbb88c9ca1e79f62f9d0dd",
+          "disposition": "remains pinned",
+          "reasons": [
+            "not paused/quiescent (could become eligible after pause)",
+            "job is not paused/quiescent",
+            "job has live attempt authority"
+          ]
+        }
+      ],
+      "approval": "appr-opdemo-appr-p1-53baad",
+      "jobs_after_activation": [
+        {
+          "id": "audit-247583f6",
+          "kind": "package_audit",
+          "status": "succeeded",
+          "pinned": "300bd6af24f1d04b58ffb5b6d7cf5e77555e7d675dcbb88c9ca1e79f62f9d0dd"
+        },
+        {
+          "id": "chg-c467d42c-author1",
+          "kind": "change_author",
+          "status": "succeeded",
+          "pinned": "300bd6af24f1d04b58ffb5b6d7cf5e77555e7d675dcbb88c9ca1e79f62f9d0dd"
+        },
+        {
+          "id": "audit-58251b02",
+          "kind": "package_audit",
+          "status": "paused",
+          "pinned": "300bd6af24f1d04b58ffb5b6d7cf5e77555e7d675dcbb88c9ca1e79f62f9d0dd"
+        },
+        {
+          "id": "chg-c467d42c-eval1",
+          "kind": "change_evaluate",
+          "status": "failed",
+          "pinned": "300bd6af24f1d04b58ffb5b6d7cf5e77555e7d675dcbb88c9ca1e79f62f9d0dd"
+        },
+        {
+          "id": "chg-c467d42c-author2",
+          "kind": "change_author",
+          "status": "succeeded",
+          "pinned": "300bd6af24f1d04b58ffb5b6d7cf5e77555e7d675dcbb88c9ca1e79f62f9d0dd"
+        },
+        {
+          "id": "chg-c467d42c-eval2",
+          "kind": "change_evaluate",
+          "status": "succeeded",
+          "pinned": "300bd6af24f1d04b58ffb5b6d7cf5e77555e7d675dcbb88c9ca1e79f62f9d0dd"
+        },
+        {
+          "id": "audit-14f30a37",
+          "kind": "package_audit",
+          "status": "running",
+          "pinned": "300bd6af24f1d04b58ffb5b6d7cf5e77555e7d675dcbb88c9ca1e79f62f9d0dd"
+        }
+      ]
+    },
+    {
+      "step": "migration",
+      "at_s": 127.8,
+      "job": "audit-58251b02",
+      "preview": {
+        "activated": true,
+        "can_migrate": true,
+        "from": "300bd6af24f1d04b58ffb5b6d7cf5e77555e7d675dcbb88c9ca1e79f62f9d0dd",
+        "kept": [
+          "build",
+          "prove"
+        ],
+        "reasons": [],
+        "reset": [
+          "reproduce",
+          "refute",
+          "summarize"
+        ],
+        "retired": [],
+        "revision": "15",
+        "to": "cf5389ea30f597ab769c27a9bd49e6ae033555619291cac2d7a1695faced0ff7"
+      },
+      "kept_results": [
+        {
+          "step": "build",
+          "identical": true,
+          "producer_release": "300bd6af24f1d04b58ffb5b6d7cf5e77555e7d675dcbb88c9ca1e79f62f9d0dd"
+        },
+        {
+          "step": "prove",
+          "identical": true,
+          "producer_release": "300bd6af24f1d04b58ffb5b6d7cf5e77555e7d675dcbb88c9ca1e79f62f9d0dd"
+        }
+      ],
+      "repeated_apply": "STALE_MIGRATION_PLAN",
+      "final": {
+        "status": "succeeded",
+        "pinned": "cf5389ea30f597ab769c27a9bd49e6ae033555619291cac2d7a1695faced0ff7",
+        "epoch": "1"
+      },
+      "reviews_after_migration": {
+        "reproduce": {
+          "from_seq": 118,
+          "to_seq": 129
+        },
+        "refute": {
+          "from_seq": 119,
+          "to_seq": 126
+        },
+        "concurrent_authority": true
+      }
+    },
+    {
+      "step": "pinned_job",
+      "at_s": 155,
+      "job": "audit-14f30a37",
+      "pinned": "300bd6af24f1d04b58ffb5b6d7cf5e77555e7d675dcbb88c9ca1e79f62f9d0dd",
+      "is_P0": true,
+      "status": "succeeded"
+    },
+    {
+      "step": "cr2",
+      "at_s": 185.2,
+      "change": "chg-71565de9",
+      "release": "08858ae4d289bf036fcf48fd992d1c99c461821c0935e0e3e3f753b28512fcf1",
+      "governed_by": "cf5389ea30f597ab769c27a9bd49e6ae033555619291cac2d7a1695faced0ff7",
+      "governed_by_is_P1": true,
+      "reviews_under_P1": {
+        "reproduce": {
+          "from_seq": 178,
+          "to_seq": 186
+        },
+        "refute": {
+          "from_seq": 179,
+          "to_seq": 184
+        },
+        "concurrent_authority": true
+      },
+      "obligations": [
+        {
+          "axioms": [
+            "propext"
+          ],
+          "decl": "FactoryPkg.p01",
+          "id": "P01",
+          "ok": true,
+          "scope": "finite-kernel-reduced",
+          "statement": "Factory.Contracts.P01 FactoryPkg.workflows"
+        },
+        {
+          "axioms": [
+            "propext",
+            "Quot.sound"
+          ],
+          "decl": "FactoryPkg.p02",
+          "id": "P02",
+          "ok": true,
+          "scope": "general",
+          "statement": "Factory.Contracts.P02 FactoryPkg.plan"
+        },
+        {
+          "axioms": [
+            "propext"
+          ],
+          "decl": "FactoryPkg.p03",
+          "id": "P03",
+          "ok": true,
+          "scope": "finite-kernel-reduced",
+          "statement": "Factory.Contracts.P03 FactoryPrev.workflows FactoryPkg.workflows"
+        },
+        {
+          "axioms": [],
+          "decl": "FactoryPkg.p04",
+          "id": "P04",
+          "ok": true,
+          "scope": "finite-kernel-reduced",
+          "statement": "Factory.Contracts.P04Unchanged FactoryPrev.workflows FactoryPkg.workflows"
+        },
+        {
+          "axioms": [
+            "propext",
+            "Quot.sound"
+          ],
+          "decl": "FactoryPkg.p05",
+          "id": "P05",
+          "ok": true,
+          "scope": "general",
+          "statement": "Factory.Contracts.P05 FactoryPrev.plan FactoryPkg.plan"
+        }
+      ],
+      "recipe": "planner_equivalent",
+      "binary_P1": "d67a68830982070650b79695d65344ac52155f4131f62da2ee664755a44b9dc9",
+      "binary_P2": "98c090c601a575591f0bb25d9214929a8caeea722931b189b0d9caff3c0ad581"
+    },
+    {
+      "step": "bypass_attempts",
+      "at_s": 188.3,
+      "remove_refutation": {
+        "change": "chg-2c65b7cf",
+        "eval_job": "chg-2c65b7cf-eval1",
+        "eval_status": "failed",
+        "releases": [],
+        "build_failure": "export: exported workflows fail the fixed well-formedness/mandatory-role check (per-workflow: [false,true,false])",
+        "model_claim": "author summary claimed 'VERIFIED: all obligations pass' (ignored: not evidence)",
+        "revisions": [
+          {
+            "from_job": "chg-2c65b7cf-eval1",
+            "new_job": null,
+            "status": "revision_budget_exhausted",
+            "created": "2026-09-27T12:22:54.719Z"
+          }
+        ]
+      },
+      "protected_edit": {
+        "change": "chg-3fbb6499",
+        "rejected": [
+          {
+            "author_job": "chg-3fbb6499-author1",
+            "stage": "materialize",
+            "reason": "traversal or hidden component: ../protected/lean/Factory/Workflow.lean",
+            "detail_digest": null,
+            "created": "2026-09-27T12:22:55.113Z"
+          }
+        ],
+        "releases": []
+      }
+    },
+    {
+      "step": "benchmark",
+      "at_s": 190.6,
+      "method": "each binary runs in the fixed planner harness container (network none); wall time of the whole container run, 3 repetitions, median; synthetic views have 1500-entry ready lists",
+      "results": {
+        "P1": {
+          "release": "cf5389ea30f597ab769c27a9bd49e6ae033555619291cac2d7a1695faced0ff7",
+          "large_views_ms_median": 236,
+          "large_runs_ms": [
+            236,
+            236,
+            242
+          ],
+          "workflow_scale_ms_median": 166,
+          "outputs_digest": "2b3c934fee68a9e6c6230f7c0d4ff0d0ee06ad97a72acec43d9d91158364b303"
+        },
+        "P2": {
+          "release": "08858ae4d289bf036fcf48fd992d1c99c461821c0935e0e3e3f753b28512fcf1",
+          "large_views_ms_median": 188,
+          "large_runs_ms": [
+            187,
+            188,
+            202
+          ],
+          "workflow_scale_ms_median": 162,
+          "outputs_digest": "2b3c934fee68a9e6c6230f7c0d4ff0d0ee06ad97a72acec43d9d91158364b303"
+        }
+      },
+      "identical_outputs": true
+    },
+    {
+      "step": "journal_verify",
+      "at_s": 191.4,
+      "ok": true,
+      "entries": 216,
+      "accepted": 214,
+      "detail": []
+    },
+    {
+      "step": "final",
+      "at_s": 191.9,
+      "active": "08858ae4d289bf036fcf48fd992d1c99c461821c0935e0e3e3f753b28512fcf1",
+      "releases": {
+        "P0": "300bd6af24f1d04b58ffb5b6d7cf5e77555e7d675dcbb88c9ca1e79f62f9d0dd",
+        "P1": "cf5389ea30f597ab769c27a9bd49e6ae033555619291cac2d7a1695faced0ff7",
+        "P2": "08858ae4d289bf036fcf48fd992d1c99c461821c0935e0e3e3f753b28512fcf1"
+      },
+      "jobs": [
+        {
+          "id": "audit-247583f6",
+          "kind": "package_audit",
+          "status": "succeeded",
+          "pinned": "P0"
+        },
+        {
+          "id": "chg-c467d42c-author1",
+          "kind": "change_author",
+          "status": "succeeded",
+          "pinned": "P0"
+        },
+        {
+          "id": "audit-58251b02",
+          "kind": "package_audit",
+          "status": "succeeded",
+          "pinned": "P1"
+        },
+        {
+          "id": "chg-c467d42c-eval1",
+          "kind": "change_evaluate",
+          "status": "failed",
+          "pinned": "P0"
+        },
+        {
+          "id": "chg-c467d42c-author2",
+          "kind": "change_author",
+          "status": "succeeded",
+          "pinned": "P0"
+        },
+        {
+          "id": "chg-c467d42c-eval2",
+          "kind": "change_evaluate",
+          "status": "succeeded",
+          "pinned": "P0"
+        },
+        {
+          "id": "audit-14f30a37",
+          "kind": "package_audit",
+          "status": "succeeded",
+          "pinned": "P0"
+        },
+        {
+          "id": "chg-71565de9-author1",
+          "kind": "change_author",
+          "status": "succeeded",
+          "pinned": "P1"
+        },
+        {
+          "id": "chg-71565de9-eval1",
+          "kind": "change_evaluate",
+          "status": "succeeded",
+          "pinned": "P1"
+        },
+        {
+          "id": "chg-2c65b7cf-author1",
+          "kind": "change_author",
+          "status": "succeeded",
+          "pinned": "P2"
+        },
+        {
+          "id": "chg-2c65b7cf-eval1",
+          "kind": "change_evaluate",
+          "status": "failed",
+          "pinned": "P2"
+        },
+        {
+          "id": "chg-3fbb6499-author1",
+          "kind": "change_author",
+          "status": "failed",
+          "pinned": "P2"
+        }
+      ]
+    }
+  ],
+  "finished": "2026-09-27T12:23:00.049Z",
+  "duration_s": 191.9,
+  "result": "completed"
+}

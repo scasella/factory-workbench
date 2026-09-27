@@ -1,0 +1,38 @@
+{
+  "outcome": "proposed",
+  "summary": "Replace the quadratic dedup+take planner with a single early-stopping pass; prove it equal to the P1 planner for every planner view (P05). Workflows unchanged.",
+  "edits": [
+    {
+      "path": "Planner.lean",
+      "operation": "replace",
+      "expected_sha256": "876a939350a593c3f4ef12468b9d5ca56a460b749f0b9b3148f40423f5730d9e",
+      "content": "import Factory.Types\n/-\n  P2 planner: single pass over the ready list that skips already-selected\n  IDs and stops as soon as the concurrency bound is reached (no quadratic\n  dedup of the whole list, no materialized intermediate list).\n-/\nnamespace FactoryPkg\nopen Factory\n\ndef pick : Nat → List StepId → List StepId → List StepId\n  | 0, _, _ => []\n  | _, _, [] => []\n  | k + 1, seen, x :: xs =>\n    if seen.contains x then pick (k + 1) seen xs else x :: pick k (x :: seen) xs\n\ndef plan (v : PlannerView) : List StepId := pick v.slots [] v.ready\n\nend FactoryPkg\n"
+    },
+    {
+      "path": "Proofs.lean",
+      "operation": "replace",
+      "expected_sha256": "5ede38f583514125b0687732539e2a9761614bafc9e029c2d7ca808f6e082354",
+      "content": "import Factory.PackageContracts\nimport FactoryPkg.Package\nimport FactoryPkg.Planner\nimport FactoryPrev.Package\nimport FactoryPrev.Planner\n/-\n  P2 proofs. P05 is a GENERAL equivalence: for every planner view the\n  optimized planner returns exactly what the verified predecessor (P1,\n  supplied read-only by the verifier as FactoryPrev) returns. P02 follows\n  from P05 plus general lemmas about the predecessor's definition.\n-/\nnamespace FactoryPkg\nopen Factory Factory.Contracts\n\ntheorem p01 : P01 workflows := by unfold P01; decide\n\ntheorem filter_filter_ne (l : List StepId) (x : StepId) (seen : List StepId) (h : seen.contains x = true) :\n    (l.filter (fun y => y != x)).filter (fun y => !seen.contains y) = l.filter (fun y => !seen.contains y) := by\n  rw [List.filter_filter]\n  congr 1\n  funext a\n  by_cases ha : a = x\n  · subst ha\n    have hm : a ∈ seen := by simpa using h\n    simp [hm]\n  · simp [ha]\ntheorem filter_filter_cons (l : List StepId) (x : StepId) (seen : List StepId) :\n    (l.filter (fun y => y != x)).filter (fun y => !seen.contains y) =\n      l.filter (fun y => !(x :: seen).contains y) := by\n  rw [List.filter_filter]\n  congr 1\n  funext a\n  by_cases ha : a = x\n  · subst ha; simp\n  · simp [ha, Bool.and_comm]\ntheorem pick_eq : ∀ (k : Nat) (seen l : List StepId),\n    pick k seen l = ((FactoryPrev.dedup l).filter (fun y => !seen.contains y)).take k\n  | 0, seen, l => by simp [pick]\n  | k + 1, seen, [] => by simp [pick, FactoryPrev.dedup]\n  | k + 1, seen, x :: xs => by\n    by_cases h : seen.contains x = true\n    · simp only [pick, h, ite_true, FactoryPrev.dedup, List.filter_cons, Bool.not_true, Bool.false_eq_true, ite_false]\n      rw [filter_filter_ne _ x seen h]\n      exact pick_eq (k + 1) seen xs\n    · have h' : seen.contains x = false := by simpa using h\n      simp only [pick, h', FactoryPrev.dedup, List.filter_cons, Bool.not_false, ite_true,\n        List.take_succ_cons, Bool.false_eq_true, ite_false]\n      rw [filter_filter_cons, pick_eq k (x :: seen) xs]\ntheorem p05 : P05 FactoryPrev.plan plan := by\n  intro v\n  unfold plan FactoryPrev.plan\n  rw [pick_eq]\n  have : (fun y : StepId => !([] : List StepId).contains y) = (fun _ => true) := by funext y; simp\n  rw [this, List.filter_eq_self.mpr (fun _ _ => rfl)]\n\ntheorem prev_dedup_sublist : ∀ l : List StepId, (FactoryPrev.dedup l).Sublist l\n  | [] => by simp [FactoryPrev.dedup]\n  | x :: xs => by\n    simp only [FactoryPrev.dedup]\n    exact ((List.filter_sublist).trans (prev_dedup_sublist xs)).cons_cons x\n\ntheorem prev_dedup_nodup : ∀ l : List StepId, (FactoryPrev.dedup l).Nodup\n  | [] => by simp [FactoryPrev.dedup]\n  | x :: xs => by\n    simp only [FactoryPrev.dedup, List.nodup_cons]\n    refine ⟨?_, (prev_dedup_nodup xs).filter _⟩\n    simp [List.mem_filter]\n\ntheorem prev_dedup_ne_nil : ∀ l : List StepId, l ≠ [] → FactoryPrev.dedup l ≠ []\n  | [] => by simp\n  | x :: xs => by simp [FactoryPrev.dedup]\n\ntheorem p02 : P02 plan := by\n  intro v\n  rw [p05 v]\n  refine ⟨?_, ?_, ?_, ?_⟩\n  · exact (List.take_sublist _ _).trans (prev_dedup_sublist _)\n  · exact (prev_dedup_nodup _).sublist (List.take_sublist _ _)\n  · simp [FactoryPrev.plan]; omega\n  · intro hr hs\n    simp [FactoryPrev.plan]\n    exact ⟨by omega, prev_dedup_ne_nil _ hr⟩\n\ntheorem p03 : P03 FactoryPrev.workflows workflows := by unfold P03; decide\n\ntheorem p04 : P04Unchanged FactoryPrev.workflows workflows := by unfold P04Unchanged; decide\n\nend FactoryPkg\n"
+    },
+    {
+      "path": "migration.json",
+      "operation": "replace",
+      "expected_sha256": "95b4e2e31d11f384895a25f4dde34767d6f06231403f032927d9025da962af2b",
+      "content": "{\"recipe\":\"planner_equivalent\"}\n"
+    },
+    {
+      "path": "package-metadata.json",
+      "operation": "replace",
+      "expected_sha256": "310b2082da237abf6868a23b8fcc56be3a9799c03d7d77643d191afb066ab536",
+      "content": "{\"name\":\"p2-single-pass-planner\",\"description\":\"P2: single-pass early-stopping ready-list selection, proved equivalent to P1 for every planner view; workflows unchanged.\",\"claims\":[\"P01\",\"P02\",\"P03\",\"P04\",\"P05\"]}\n"
+    }
+  ],
+  "claimed_obligations": [
+    "P01",
+    "P02",
+    "P03",
+    "P04",
+    "P05"
+  ],
+  "blockers": []
+}

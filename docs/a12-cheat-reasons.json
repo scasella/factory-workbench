@@ -1,0 +1,12 @@
+{
+  "sorry": "lint: Proofs.lean: forbidden-token (sorry)",
+  "extra_axiom": "lint: Proofs.lean: forbidden-token (axiom)",
+  "native_decide": "lint: Proofs.lean: forbidden-token (native_decide)",
+  "implemented_by": "lint: Planner.lean: forbidden-token (implemented_by); Planner.lean: forbidden-attribute (implemented_by)",
+  "protected_import": "lint: Proofs.lean: forbidden-import (Factory.Kernel)",
+  "protected_namespace": "lint: Proofs.lean: forbidden-namespace (Factory.Contracts)",
+  "weaker_statement": "statement_bridge: candidate declarations do not have the frozen statement types, or bound values disagree with the built binary\nerror: FactoryBridge.lean:10:69: Type mismatch\nerror: build failed",
+  "false_pass_claim": "candidate_proofs: candidate proof modules do not compile\nerror: FactoryPkg/Proofs.lean:44:2: unsolved goals\nerror: build failed",
+  "binary_definition_mismatch": "statement_bridge: candidate declarations do not have the frozen statement types, or bound values disagree with the built binary\nerror: FactoryBridge.lean:15:1961: Tactic `decide` proved that the proposition\nerror: build failed",
+  "source_binary_mismatch": "source_binding: build receipt is for a different source"
+}

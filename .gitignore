@@ -1,0 +1,13 @@
+node_modules/
+.lake/
+dist/
+*.olean
+*.ilean
+/state/
+.factory-state/
+*.log
+.demo-state/
+.video-build/
+.DS_Store
+scripts/demo-video/node_modules/
+scripts/demo-video/.tmp-*

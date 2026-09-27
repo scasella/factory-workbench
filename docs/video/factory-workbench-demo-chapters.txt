@@ -1,0 +1,10 @@
+0:00 Introduction
+0:06 One-click sign-in
+0:08 The workbench
+0:20 A durable, reviewed job
+0:41 Improve this workbench
+0:50 P0 builds and verifies its successor
+1:06 Release review
+1:33 Approval and activation
+1:55 After activation: pinning and parallel reviews
+2:23 Summary

@@ -1,0 +1,49 @@
+{
+  "outcome": "proposed",
+  "summary": "Repair: the P02 slot-bound case needs `omega` after simplification (min slots n ≤ slots). Otherwise unchanged: reviews run in parallel, both gates retained, ordering-only migration.",
+  "edits": [
+    {
+      "path": "Package.lean",
+      "operation": "replace",
+      "expected_sha256": "d73c5d64bfeb255beb0af18af91e4f75c5e4f2875e5186172c373186c94817a6",
+      "content": "import Factory.Types\n/-\n  Orchestration package P1: reproduction and refutation are independent.\n  The incidental ordering edge refute-after-reproduce is removed; neither\n  review consumes the other's output. Both gates remain mandatory.\n-/\nnamespace FactoryPkg\nopen Factory\n\ndef evalSteps : List StepSpec := [\n  { id := \"build\", role := .build, after := [],\n    inputs := [{ name := \"candidate\", source := .jobInput }], prompt := \"\", retries := 1 },\n  { id := \"prove\", role := .prove, after := [],\n    inputs := [{ name := \"payload\", source := .stepOutput \"build\" }], prompt := \"\", retries := 1 },\n  { id := \"reproduce\", role := .reproduce, after := [],\n    inputs := [{ name := \"payload\", source := .stepOutput \"build\" },\n               { name := \"proof\", source := .stepOutput \"prove\" }],\n    prompt := \"prompts/reproduce.md\", retries := 2 },\n  { id := \"refute\", role := .refute, after := [],\n    inputs := [{ name := \"payload\", source := .stepOutput \"build\" },\n               { name := \"proof\", source := .stepOutput \"prove\" }],\n    prompt := \"prompts/refute.md\", retries := 2 },\n  { id := \"summarize\", role := .summarize, after := [],\n    inputs := [{ name := \"reproduction\", source := .stepOutput \"reproduce\" },\n               { name := \"refutation\", source := .stepOutput \"refute\" }],\n    prompt := \"prompts/summarize.md\", retries := 2 }\n]\n\ndef auditWorkflow : WorkflowDef := { kind := .packageAudit, steps := evalSteps, maxParallel := 2 }\ndef evaluateWorkflow : WorkflowDef := { kind := .changeEvaluate, steps := evalSteps, maxParallel := 2 }\n\ndef authorWorkflow : WorkflowDef := {\n  kind := .changeAuthor, maxParallel := 1,\n  steps := [\n    { id := \"author\", role := .author, after := [],\n      inputs := [{ name := \"request\", source := .jobInput }], prompt := \"prompts/author.md\", retries := 1 },\n    { id := \"materialize\", role := .materialize, after := [],\n      inputs := [{ name := \"proposal\", source := .stepOutput \"author\" }], prompt := \"\", retries := 0 }\n  ] }\n\ndef workflows : List WorkflowDef := [auditWorkflow, authorWorkflow, evaluateWorkflow]\n\nend FactoryPkg\n"
+    },
+    {
+      "path": "Planner.lean",
+      "operation": "replace",
+      "expected_sha256": "309c28c7f4f2dae4afc130942d4185aa8e203f20cf94b880f58ceb6f06d82017",
+      "content": "import Factory.Types\n/-\n  P1 planner: stable ready order, dispatch up to the effective concurrency\n  bound offered by the kernel (so independent reviews run in parallel).\n-/\nnamespace FactoryPkg\nopen Factory\n\n/-- Remove later duplicates, keeping first occurrences. -/\ndef dedup : List StepId → List StepId\n  | [] => []\n  | x :: xs => x :: (dedup xs).filter (fun y => y != x)\n\ndef plan (v : PlannerView) : List StepId :=\n  (dedup v.ready).take v.slots\n\nend FactoryPkg\n"
+    },
+    {
+      "path": "Proofs.lean",
+      "operation": "replace",
+      "expected_sha256": "840ec5e07149e0fdb738633e00e848ebd6153539892d9b73bbc7990ec1333075",
+      "content": "import Factory.PackageContracts\nimport FactoryPkg.Package\nimport FactoryPkg.Planner\nimport FactoryPrev.Package\nimport FactoryPrev.Planner\n/-\n  P1 proofs. P01/P03/P04 are finite kernel-reduced checks of the fixed\n  Boolean functions on this package's exports versus the verifier-supplied\n  predecessor (P0). P02 is general over all planner views.\n-/\nnamespace FactoryPkg\nopen Factory Factory.Contracts\n\ntheorem p01 : P01 workflows := by unfold P01; decide\n\ntheorem dedup_sublist : ∀ l : List StepId, (dedup l).Sublist l\n  | [] => by simp [dedup]\n  | x :: xs => by\n    simp only [dedup]\n    exact ((List.filter_sublist).trans (dedup_sublist xs)).cons_cons x\n\ntheorem dedup_nodup : ∀ l : List StepId, (dedup l).Nodup\n  | [] => by simp [dedup]\n  | x :: xs => by\n    simp only [dedup, List.nodup_cons]\n    refine ⟨?_, (dedup_nodup xs).filter _⟩\n    simp [List.mem_filter]\n\ntheorem dedup_ne_nil : ∀ l : List StepId, l ≠ [] → dedup l ≠ []\n  | [] => by simp\n  | x :: xs => by simp [dedup]\n\ntheorem p02 : P02 plan := by\n  intro v\n  refine ⟨?_, ?_, ?_, ?_⟩\n  · exact (List.take_sublist _ _).trans (dedup_sublist _)\n  · exact (dedup_nodup _).sublist (List.take_sublist _ _)\n  · simp [plan]; omega\n  · intro hr hs\n    simp [plan]\n    exact ⟨by omega, dedup_ne_nil _ hr⟩\n\ntheorem p03 : P03 FactoryPrev.workflows workflows := by unfold P03; decide\n\ntheorem p04 : P04OrderingOnly FactoryPrev.workflows workflows := by unfold P04OrderingOnly; decide\n\nend FactoryPkg\n"
+    },
+    {
+      "path": "migration.json",
+      "operation": "replace",
+      "expected_sha256": "dd7edbefa100deb7e5b893b1aa6bf27b7d871abbb4af06d0f432820b4ff43196",
+      "content": "{\"recipe\":\"ordering_only\"}\n"
+    },
+    {
+      "path": "package-metadata.json",
+      "operation": "replace",
+      "expected_sha256": "175aaaf2737c2a8dacbbfdaa5babeb201528a5a2f1ae89769935ca45ca2c6618",
+      "content": "{\"name\":\"p1-parallel-reviews\",\"description\":\"P1: reproduction and refutation run in parallel after the shared build/proof inputs; both publication gates retained.\",\"claims\":[\"P01\",\"P02\",\"P03\",\"P04\"]}\n"
+    },
+    {
+      "path": "supplemental-tests/views.json",
+      "operation": "replace",
+      "expected_sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+      "content": "[{\"ready\":[\"reproduce\",\"refute\",\"reproduce\"],\"slots\":\"2\"}]\n"
+    }
+  ],
+  "claimed_obligations": [
+    "P01",
+    "P02",
+    "P03",
+    "P04"
+  ],
+  "blockers": []
+}

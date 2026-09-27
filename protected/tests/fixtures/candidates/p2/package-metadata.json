@@ -1,0 +1,1 @@
+{"name":"p2-single-pass-planner","description":"P2: single-pass early-stopping ready-list selection, proved equivalent to P1 for every planner view; workflows unchanged.","claims":["P01","P02","P03","P04","P05"]}

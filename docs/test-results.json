@@ -1,0 +1,592 @@
+{
+  "generated": "2026-09-27T12:14:27.532Z",
+  "gates": [
+    {
+      "id": "typecheck",
+      "ok": true,
+      "seconds": 1
+    },
+    {
+      "id": "kernel_build",
+      "ok": true,
+      "seconds": 0
+    },
+    {
+      "id": "kernel_proofs",
+      "ok": true,
+      "seconds": 34
+    },
+    {
+      "id": "doctor",
+      "ok": true,
+      "seconds": 2
+    },
+    {
+      "id": "web_build",
+      "ok": true,
+      "seconds": 1
+    },
+    {
+      "id": "unit",
+      "ok": true,
+      "seconds": 5
+    },
+    {
+      "id": "acceptance-core",
+      "ok": true,
+      "seconds": 12
+    },
+    {
+      "id": "acceptance-verifier",
+      "ok": true,
+      "seconds": 43
+    },
+    {
+      "id": "kernel-mutants",
+      "ok": true,
+      "seconds": 25
+    },
+    {
+      "id": "acceptance-engine",
+      "ok": true,
+      "seconds": 197
+    },
+    {
+      "id": "demo_fake_llm",
+      "ok": true,
+      "seconds": 192
+    },
+    {
+      "id": "acceptance-recursion",
+      "ok": true,
+      "seconds": 0
+    }
+  ],
+  "tests": [
+    {
+      "file": "unit",
+      "name": "canonical golden vectors: TS and Lean produce identical canonical bytes and digests",
+      "status": "passed"
+    },
+    {
+      "file": "unit",
+      "name": "strict JSON boundary rejects ambiguous inputs (TS and kernel)",
+      "status": "passed"
+    },
+    {
+      "file": "unit",
+      "name": "A19: happy path review — completed, schema-valid result, usage, digests",
+      "status": "passed"
+    },
+    {
+      "file": "unit",
+      "name": "A19: happy path author (from response file) and proof_repair share the author schema",
+      "status": "passed"
+    },
+    {
+      "file": "unit",
+      "name": "A19: malformed JSONL -> invalid_output",
+      "status": "passed"
+    },
+    {
+      "file": "unit",
+      "name": "A19: truncated final output -> invalid_output",
+      "status": "passed"
+    },
+    {
+      "file": "unit",
+      "name": "A19: missing final output file -> invalid_output",
+      "status": "passed"
+    },
+    {
+      "file": "unit",
+      "name": "A19: no turn.completed event -> invalid_output even with a valid output file",
+      "status": "passed"
+    },
+    {
+      "file": "unit",
+      "name": "A19: nonzero exit -> failed",
+      "status": "passed"
+    },
+    {
+      "file": "unit",
+      "name": "A19: no matching scenario rule -> failed (turn.failed + nonzero exit)",
+      "status": "passed"
+    },
+    {
+      "file": "unit",
+      "name": "A19: output overflow -> failed output_overflow, bounded capture",
+      "status": "passed"
+    },
+    {
+      "file": "unit",
+      "name": "A19: unknown telemetry events preserved as diagnostics; still completed",
+      "status": "passed"
+    },
+    {
+      "file": "unit",
+      "name": "A19: timeout kills the whole process group -> timed_out, no leftover processes",
+      "status": "passed"
+    },
+    {
+      "file": "unit",
+      "name": "A19: AbortSignal -> cancelled, process group killed",
+      "status": "passed"
+    },
+    {
+      "file": "unit",
+      "name": "A19: auth failure -> failed auth_failure",
+      "status": "passed"
+    },
+    {
+      "file": "unit",
+      "name": "A20: forbidden tool (command_execution) event fails the attempt despite valid output",
+      "status": "passed"
+    },
+    {
+      "file": "unit",
+      "name": "A19: schema violation (extra model-chosen field) -> invalid_output",
+      "status": "passed"
+    },
+    {
+      "file": "unit",
+      "name": "A19: schema violation (wrong enum) -> invalid_output",
+      "status": "passed"
+    },
+    {
+      "file": "unit",
+      "name": "A19: unsupported --exec prefix fails with a CLI usage error; no fallback invocation",
+      "status": "passed"
+    },
+    {
+      "file": "unit",
+      "name": "A19: output schema path that is not the role's pinned schema is refused before spawn",
+      "status": "passed"
+    },
+    {
+      "file": "unit",
+      "name": "A20: tampered CODEX_HOME profile is refused before spawn",
+      "status": "passed"
+    },
+    {
+      "file": "unit",
+      "name": "A20: argument array disables every forbidden feature and never carries the prompt",
+      "status": "passed"
+    },
+    {
+      "file": "unit",
+      "name": "A20: role schemas are strict and carry no identity/authority fields",
+      "status": "passed"
+    },
+    {
+      "file": "unit",
+      "name": "doctor: fake CLI rejects --exec and reports the fake version",
+      "status": "passed"
+    },
+    {
+      "file": "unit",
+      "name": "doctor: liveSmokeTest refuses without explicit consent",
+      "status": "passed"
+    },
+    {
+      "file": "unit",
+      "name": "A20: doctor against the REAL codex CLI (non-inference probes, isolated CODEX_HOME)",
+      "status": "passed"
+    },
+    {
+      "file": "unit",
+      "name": "malformed naturals are rejected per request and leave the coordinator writable",
+      "status": "passed"
+    },
+    {
+      "file": "unit",
+      "name": "LoginLinks: single use, expiry, replacement",
+      "status": "passed"
+    },
+    {
+      "file": "unit",
+      "name": "claim endpoint: CSRF required, one cookie per link, mint is Bearer-only",
+      "status": "passed"
+    },
+    {
+      "file": "acceptance-core",
+      "name": "A03: stale result — expire A, authorize B, deliver A's success: rejected, B/current state untouched",
+      "status": "passed"
+    },
+    {
+      "file": "acceptance-core",
+      "name": "A04: duplicate callbacks — repeated delivery yields one accepted commit and one semantic completion",
+      "status": "passed"
+    },
+    {
+      "file": "acceptance-core",
+      "name": "A05: conflicting duplicate — reused command id with different bytes, or different result for a completed attempt",
+      "status": "passed"
+    },
+    {
+      "file": "acceptance-core",
+      "name": "A06: cancellation race (kernel barrier) — no new authority or acceptance after cancel; terminate intents emitted",
+      "status": "passed"
+    },
+    {
+      "file": "acceptance-core",
+      "name": "A09: mixed source evidence — evidence is bound to a payload; a changed byte creates a new subject with no evidence",
+      "status": "passed"
+    },
+    {
+      "file": "acceptance-core",
+      "name": "A10: missing/negative/inconclusive review — no publication (kernel gate)",
+      "status": "passed"
+    },
+    {
+      "file": "acceptance-core",
+      "name": "A13: activation race — two approvals based on P0; the second activation gets BASE_RELEASE_CHANGED",
+      "status": "passed"
+    },
+    {
+      "file": "acceptance-core",
+      "name": "A14: create/activate race — every new job pins exactly one complete release",
+      "status": "passed"
+    },
+    {
+      "file": "acceptance-core",
+      "name": "A15: safe migration — paused P0 job with committed build/prove migrates to P1, reuses results exactly, completes reviews",
+      "status": "passed"
+    },
+    {
+      "file": "acceptance-core",
+      "name": "A16: unsafe migration — changed fingerprint, unmet prerequisite, active attempt, stale preview are rejected without moving versions",
+      "status": "passed"
+    },
+    {
+      "file": "acceptance-core",
+      "name": "A17: pinning — jobs not selected for migration finish on P0 after P1 activation; P0 artifacts retained",
+      "status": "passed"
+    },
+    {
+      "file": "acceptance-core",
+      "name": "A18: rollback — re-activating P0 changes only future defaults; P1 jobs/history unchanged",
+      "status": "passed"
+    },
+    {
+      "file": "acceptance-core",
+      "name": "A28: budgets — retries, restarts, child jobs and revisions do not reset parent limits",
+      "status": "passed"
+    },
+    {
+      "file": "acceptance-core",
+      "name": "A29: approval integrity — forged, changed-digest and revoked approvals fail; revocation does not rewrite history",
+      "status": "passed"
+    },
+    {
+      "file": "acceptance-core",
+      "name": "A22: replay — rebuild authoritative state from genesis and the accepted journal without any LLM call",
+      "status": "passed"
+    },
+    {
+      "file": "acceptance-core",
+      "name": "A21: path attacks — traversal, absolute, hidden, symlinks, hard links, wrong preimage, oversized, unicode",
+      "status": "passed"
+    },
+    {
+      "file": "acceptance-core",
+      "name": "A23: crash persistence — failures around blob fsync/rename, journal commit, receipt return, outbox dispatch",
+      "status": "passed"
+    },
+    {
+      "file": "acceptance-core",
+      "name": "A24: generated command traces — executable kernel preserves invariants and oracle transition properties",
+      "status": "passed"
+    },
+    {
+      "file": "acceptance-verifier",
+      "name": "A12: proof cheats fail for recorded reasons; raw stdout/claims never create a receipt",
+      "status": "passed"
+    },
+    {
+      "file": "acceptance-verifier",
+      "name": "A25: nonvacuity — an empty/reject-all planner fails the fixed plan contract; the positive case passes",
+      "status": "passed"
+    },
+    {
+      "file": "acceptance-verifier",
+      "name": "A11: protected file edits are rejected at materialization (kernel, verifier, contracts, build files, isolation profile)",
+      "status": "passed"
+    },
+    {
+      "file": "acceptance-verifier",
+      "name": "A20: candidate/build containers cannot read credentials, controller data, host sockets, or the network",
+      "status": "passed"
+    },
+    {
+      "file": "acceptance-verifier",
+      "name": "A30: no fake assurance — with the verifier unavailable, jobs cannot produce verified evidence or publish",
+      "status": "passed"
+    },
+    {
+      "file": "acceptance-verifier",
+      "name": "A12b: tampered release bundle binary is detected before activation/execution",
+      "status": "passed"
+    },
+    {
+      "file": "kernel-mutants",
+      "name": "§9.4 kernel semantic mutants are killed by their intended guard/test (and proof, when present)",
+      "status": "passed"
+    },
+    {
+      "file": "acceptance-engine",
+      "name": "A01: happy path — real build, proof replay and two distinct review attempts; publication requires their evidence",
+      "status": "passed"
+    },
+    {
+      "file": "acceptance-engine",
+      "name": "A02: restart after committed completion — the committed step is not reinvoked; its artifact is unchanged",
+      "status": "passed"
+    },
+    {
+      "file": "acceptance-engine",
+      "name": "A06: cancellation race with a live container — authority revoked at commit; container cleaned up; result rejected",
+      "status": "passed"
+    },
+    {
+      "file": "acceptance-engine",
+      "name": "A10: negative and inconclusive reviews block publication end-to-end; the reviewer is not re-asked until pass",
+      "status": "passed"
+    },
+    {
+      "file": "acceptance-engine",
+      "name": "A07: lost supervisor/process — kill the workbench mid-attempt; recovery fences, terminates the container, retries",
+      "status": "passed"
+    },
+    {
+      "file": "acceptance-engine",
+      "name": "A08: launch uncertainty — crash between container launch and recording it; recover without blind double launch",
+      "status": "passed"
+    },
+    {
+      "file": "acceptance-recursion",
+      "name": "A26: real recursion — P0 produces P1, P1 produces P2; executed planner hashes change; evidence bound; no external patch",
+      "status": "passed"
+    },
+    {
+      "file": "acceptance-recursion",
+      "name": "A27: equivalence improvement — general P05 theorem checked; fixtures agree; benchmark measured and recorded",
+      "status": "passed"
+    }
+  ],
+  "acceptance": {
+    "A01": {
+      "status": "passed",
+      "tests": [
+        "passed: A01: happy path — real build, proof replay and two distinct review attempts; publication requires their evidence"
+      ]
+    },
+    "A02": {
+      "status": "passed",
+      "tests": [
+        "passed: A02: restart after committed completion — the committed step is not reinvoked; its artifact is unchanged"
+      ]
+    },
+    "A03": {
+      "status": "passed",
+      "tests": [
+        "passed: A03: stale result — expire A, authorize B, deliver A's success: rejected, B/current state untouched"
+      ]
+    },
+    "A04": {
+      "status": "passed",
+      "tests": [
+        "passed: A04: duplicate callbacks — repeated delivery yields one accepted commit and one semantic completion"
+      ]
+    },
+    "A05": {
+      "status": "passed",
+      "tests": [
+        "passed: A05: conflicting duplicate — reused command id with different bytes, or different result for a completed attempt"
+      ]
+    },
+    "A06": {
+      "status": "passed",
+      "tests": [
+        "passed: A06: cancellation race (kernel barrier) — no new authority or acceptance after cancel; terminate intents emitted",
+        "passed: A06: cancellation race with a live container — authority revoked at commit; container cleaned up; result rejected"
+      ]
+    },
+    "A07": {
+      "status": "passed",
+      "tests": [
+        "passed: A07: lost supervisor/process — kill the workbench mid-attempt; recovery fences, terminates the container, retries"
+      ]
+    },
+    "A08": {
+      "status": "passed",
+      "tests": [
+        "passed: A08: launch uncertainty — crash between container launch and recording it; recover without blind double launch"
+      ]
+    },
+    "A09": {
+      "status": "passed",
+      "tests": [
+        "passed: A09: mixed source evidence — evidence is bound to a payload; a changed byte creates a new subject with no evidence"
+      ]
+    },
+    "A10": {
+      "status": "passed",
+      "tests": [
+        "passed: A10: missing/negative/inconclusive review — no publication (kernel gate)",
+        "passed: A10: negative and inconclusive reviews block publication end-to-end; the reviewer is not re-asked until pass"
+      ]
+    },
+    "A11": {
+      "status": "passed",
+      "tests": [
+        "passed: A11: protected file edits are rejected at materialization (kernel, verifier, contracts, build files, isolation profile)"
+      ]
+    },
+    "A12": {
+      "status": "passed",
+      "tests": [
+        "passed: A12: proof cheats fail for recorded reasons; raw stdout/claims never create a receipt",
+        "passed: A12b: tampered release bundle binary is detected before activation/execution"
+      ]
+    },
+    "A13": {
+      "status": "passed",
+      "tests": [
+        "passed: A13: activation race — two approvals based on P0; the second activation gets BASE_RELEASE_CHANGED"
+      ]
+    },
+    "A14": {
+      "status": "passed",
+      "tests": [
+        "passed: A14: create/activate race — every new job pins exactly one complete release"
+      ]
+    },
+    "A15": {
+      "status": "passed",
+      "tests": [
+        "passed: A15: safe migration — paused P0 job with committed build/prove migrates to P1, reuses results exactly, completes reviews"
+      ]
+    },
+    "A16": {
+      "status": "passed",
+      "tests": [
+        "passed: A16: unsafe migration — changed fingerprint, unmet prerequisite, active attempt, stale preview are rejected without moving versions"
+      ]
+    },
+    "A17": {
+      "status": "passed",
+      "tests": [
+        "passed: A17: pinning — jobs not selected for migration finish on P0 after P1 activation; P0 artifacts retained"
+      ]
+    },
+    "A18": {
+      "status": "passed",
+      "tests": [
+        "passed: A18: rollback — re-activating P0 changes only future defaults; P1 jobs/history unchanged"
+      ]
+    },
+    "A19": {
+      "status": "passed",
+      "tests": [
+        "passed: A19: happy path review — completed, schema-valid result, usage, digests",
+        "passed: A19: happy path author (from response file) and proof_repair share the author schema",
+        "passed: A19: malformed JSONL -> invalid_output",
+        "passed: A19: truncated final output -> invalid_output",
+        "passed: A19: missing final output file -> invalid_output",
+        "passed: A19: no turn.completed event -> invalid_output even with a valid output file",
+        "passed: A19: nonzero exit -> failed",
+        "passed: A19: no matching scenario rule -> failed (turn.failed + nonzero exit)",
+        "passed: A19: output overflow -> failed output_overflow, bounded capture",
+        "passed: A19: unknown telemetry events preserved as diagnostics; still completed",
+        "passed: A19: timeout kills the whole process group -> timed_out, no leftover processes",
+        "passed: A19: AbortSignal -> cancelled, process group killed",
+        "passed: A19: auth failure -> failed auth_failure",
+        "passed: A19: schema violation (extra model-chosen field) -> invalid_output",
+        "passed: A19: schema violation (wrong enum) -> invalid_output",
+        "passed: A19: unsupported --exec prefix fails with a CLI usage error; no fallback invocation",
+        "passed: A19: output schema path that is not the role's pinned schema is refused before spawn"
+      ]
+    },
+    "A20": {
+      "status": "passed",
+      "tests": [
+        "passed: A20: forbidden tool (command_execution) event fails the attempt despite valid output",
+        "passed: A20: tampered CODEX_HOME profile is refused before spawn",
+        "passed: A20: argument array disables every forbidden feature and never carries the prompt",
+        "passed: A20: role schemas are strict and carry no identity/authority fields",
+        "passed: A20: doctor against the REAL codex CLI (non-inference probes, isolated CODEX_HOME)",
+        "passed: A20: candidate/build containers cannot read credentials, controller data, host sockets, or the network"
+      ]
+    },
+    "A21": {
+      "status": "passed",
+      "tests": [
+        "passed: A21: path attacks — traversal, absolute, hidden, symlinks, hard links, wrong preimage, oversized, unicode"
+      ]
+    },
+    "A22": {
+      "status": "passed",
+      "tests": [
+        "passed: A22: replay — rebuild authoritative state from genesis and the accepted journal without any LLM call"
+      ]
+    },
+    "A23": {
+      "status": "passed",
+      "tests": [
+        "passed: A23: crash persistence — failures around blob fsync/rename, journal commit, receipt return, outbox dispatch"
+      ]
+    },
+    "A24": {
+      "status": "passed",
+      "tests": [
+        "passed: A24: generated command traces — executable kernel preserves invariants and oracle transition properties"
+      ]
+    },
+    "A25": {
+      "status": "passed",
+      "tests": [
+        "passed: A25: nonvacuity — an empty/reject-all planner fails the fixed plan contract; the positive case passes"
+      ]
+    },
+    "A26": {
+      "status": "passed",
+      "tests": [
+        "passed: A26: real recursion — P0 produces P1, P1 produces P2; executed planner hashes change; evidence bound; no external patch"
+      ]
+    },
+    "A27": {
+      "status": "passed",
+      "tests": [
+        "passed: A27: equivalence improvement — general P05 theorem checked; fixtures agree; benchmark measured and recorded"
+      ]
+    },
+    "A28": {
+      "status": "passed",
+      "tests": [
+        "passed: A28: budgets — retries, restarts, child jobs and revisions do not reset parent limits"
+      ]
+    },
+    "A29": {
+      "status": "passed",
+      "tests": [
+        "passed: A29: approval integrity — forged, changed-digest and revoked approvals fail; revocation does not rewrite history"
+      ]
+    },
+    "A30": {
+      "status": "passed",
+      "tests": [
+        "passed: A30: no fake assurance — with the verifier unavailable, jobs cannot produce verified evidence or publish"
+      ]
+    }
+  },
+  "kernel_mutants": {
+    "status": "passed",
+    "detail": "docs/kernel-mutants.json"
+  },
+  "live_codex_demo": {
+    "status": "not_run",
+    "reason": "doctor blocks live mode: codex-cli 0.155.1 cannot disable unified_exec (see OPEN-ITEMS.md)"
+  },
+  "ok": true
+}

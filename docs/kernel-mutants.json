@@ -1,0 +1,38 @@
+[
+  {
+    "id": "accept_stale_result",
+    "status": "killed_by_test",
+    "observed": "result from a superseded attempt accepted",
+    "proof_kill": "killed_by_proof (Proofs.lean fails against mutant)"
+  },
+  {
+    "id": "start_after_cancel",
+    "status": "killed_by_test",
+    "observed": "authority granted after cancellation",
+    "proof_kill": "killed_by_proof (Proofs.lean fails against mutant)"
+  },
+  {
+    "id": "publish_without_refutation",
+    "status": "killed_by_test",
+    "observed": "release published without refutation evidence",
+    "proof_kill": "killed_by_proof (Proofs.lean fails against mutant)"
+  },
+  {
+    "id": "approval_for_different_digest",
+    "status": "killed_by_test",
+    "observed": "activated a release with an approval for a different digest",
+    "proof_kill": "killed_by_proof (Proofs.lean fails against mutant)"
+  },
+  {
+    "id": "drop_evidence_on_migration",
+    "status": "killed_by_test",
+    "observed": "migration dropped completed evidence",
+    "proof_kill": "killed_by_proof (Proofs.lean fails against mutant)"
+  },
+  {
+    "id": "activation_mutates_pinned_jobs",
+    "status": "killed_by_test",
+    "observed": "changing the default moved an existing pinned job",
+    "proof_kill": "killed_by_proof (Proofs.lean fails against mutant)"
+  }
+]

@@ -1,0 +1,7 @@
+{
+  "name": "factory-workbench-demo-video",
+  "private": true,
+  "type": "module",
+  "description": "Records the operator demo video by driving the real UI with a scripted browser. Not a product dependency.",
+  "dependencies": { "playwright": "1.63.0" }
+}

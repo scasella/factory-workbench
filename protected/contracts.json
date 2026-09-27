@@ -1,0 +1,157 @@
+{
+  "version": "1",
+  "approved_axioms": [
+    "propext",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "kernel": [
+    {
+      "id": "K01",
+      "definition": "Factory.Contracts.K01",
+      "theorems": [
+        "Factory.Contracts.initial_safe",
+        "Factory.Contracts.apply_preserves",
+        "Factory.Contracts.reachable_safe",
+        "Factory.Contracts.steps_safe"
+      ],
+      "title": "Well-formed state"
+    },
+    {
+      "id": "K02",
+      "definition": "Factory.Contracts.K02 + Factory.Contracts.AcceptedStable",
+      "theorems": [
+        "Factory.Contracts.k02_stable",
+        "Factory.Contracts.k02_trace"
+      ],
+      "title": "Single accepted completion"
+    },
+    {
+      "id": "K03",
+      "definition": "Factory.Contracts.K03 + Factory.Contracts.FencedAcceptance",
+      "theorems": [
+        "Factory.Contracts.k03_fenced"
+      ],
+      "title": "Fenced results"
+    },
+    {
+      "id": "K04",
+      "definition": "Factory.Contracts.DependencySafe",
+      "theorems": [
+        "Factory.Contracts.k04_dependency"
+      ],
+      "title": "Dependency/input safety"
+    },
+    {
+      "id": "K05",
+      "definition": "Factory.Contracts.K05 + Factory.Contracts.CancellationFinal",
+      "theorems": [
+        "Factory.Contracts.k05_final"
+      ],
+      "title": "Cancellation"
+    },
+    {
+      "id": "K06",
+      "definition": "Factory.Contracts.K06 + Factory.Contracts.PublicationGated",
+      "theorems": [
+        "Factory.Contracts.k06_gated"
+      ],
+      "title": "Required evidence"
+    },
+    {
+      "id": "K07",
+      "definition": "Factory.Contracts.K07 + Factory.Contracts.ActivationBound",
+      "theorems": [
+        "Factory.Contracts.k07_bound"
+      ],
+      "title": "Release binding"
+    },
+    {
+      "id": "K08",
+      "definition": "Factory.Contracts.PinningPreserved",
+      "theorems": [
+        "Factory.Contracts.k08_pinning"
+      ],
+      "title": "Version pinning"
+    },
+    {
+      "id": "K09",
+      "definition": "Factory.Contracts.MigrationPreserving",
+      "theorems": [
+        "Factory.Contracts.k09_migration"
+      ],
+      "title": "Migration preservation"
+    },
+    {
+      "id": "K10",
+      "definition": "Factory.Contracts.K10",
+      "theorems": [
+        "Factory.Contracts.apply_preserves"
+      ],
+      "title": "Resource authority"
+    },
+    {
+      "id": "K11",
+      "definition": "Factory.replay",
+      "theorems": [
+        "Factory.Contracts.k11_replay_nil",
+        "Factory.Contracts.k11_replay_cons_ok",
+        "Factory.Contracts.k11_replay_cons_err",
+        "Factory.Contracts.k11_replay_append",
+        "Factory.Contracts.k11_replay_reachable"
+      ],
+      "title": "Replay determinism (definitional: apply is a pure function)"
+    },
+    {
+      "id": "K12",
+      "definition": "Factory.Contracts.EffectCausality",
+      "theorems": [
+        "Factory.Contracts.k12_causality"
+      ],
+      "title": "Effect causality"
+    }
+  ],
+  "package": [
+    {
+      "id": "P01",
+      "statement": "Factory.Contracts.P01 FactoryPkg.workflows",
+      "decl": "FactoryPkg.p01",
+      "scope": "finite-kernel-reduced",
+      "required": "always"
+    },
+    {
+      "id": "P02",
+      "statement": "Factory.Contracts.P02 FactoryPkg.plan",
+      "decl": "FactoryPkg.p02",
+      "scope": "general",
+      "required": "always"
+    },
+    {
+      "id": "P03",
+      "statement": "Factory.Contracts.P03 FactoryPrev.workflows FactoryPkg.workflows",
+      "decl": "FactoryPkg.p03",
+      "scope": "finite-kernel-reduced",
+      "required": "always"
+    },
+    {
+      "id": "P04",
+      "statement": "Factory.Contracts.P04OrderingOnly | Factory.Contracts.P04Unchanged (by migration.json recipe)",
+      "decl": "FactoryPkg.p04",
+      "scope": "finite-kernel-reduced",
+      "required": "recipe ordering_only | planner_equivalent"
+    },
+    {
+      "id": "P05",
+      "statement": "Factory.Contracts.P05 FactoryPrev.plan FactoryPkg.plan",
+      "decl": "FactoryPkg.p05",
+      "scope": "general",
+      "required": "recipe planner_equivalent"
+    }
+  ],
+  "publication_roles": [
+    "build",
+    "prove",
+    "reproduce",
+    "refute"
+  ]
+}

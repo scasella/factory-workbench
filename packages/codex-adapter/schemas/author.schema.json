@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "author_output",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["outcome", "summary", "edits", "claimed_obligations", "blockers"],
+  "properties": {
+    "outcome": { "type": "string", "enum": ["proposed", "blocked"] },
+    "summary": { "type": "string" },
+    "edits": {
+      "type": "array",
+      "maxItems": 64,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["path", "operation", "expected_sha256", "content"],
+        "properties": {
+          "path": { "type": "string" },
+          "operation": { "type": "string", "enum": ["replace", "create", "delete"] },
+          "expected_sha256": { "type": ["string", "null"], "pattern": "^[0-9a-f]{64}$" },
+          "content": { "type": ["string", "null"] }
+        }
+      }
+    },
+    "claimed_obligations": { "type": "array", "items": { "type": "string" } },
+    "blockers": { "type": "array", "items": { "type": "string" } }
+  }
+}

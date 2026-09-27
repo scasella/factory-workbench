@@ -1,0 +1,131 @@
+1
+00:00:06,000 --> 00:00:08,633
+`workbench serve` prints a one-time sign-in link. Open it, and you're in
+Single use, expires in 5 minutes, never sent to the server in a URL; no token to copy
+
+2
+00:00:08,633 --> 00:00:12,867
+Home asks one question. Everything else is one step away
+Genesis release P0 was installed and verified at setup
+
+3
+00:00:12,867 --> 00:00:17,567
+Honest by default: this recording uses a deterministic fake model
+Kernel, database, sandboxed builds, Lean proofs and release gates are all real
+
+4
+00:00:17,567 --> 00:00:20,067
+System facts sit in one quiet line: checker, protected components, sandbox
+
+5
+00:00:20,067 --> 00:00:24,167
+Run a real job: audit a package with build, proof and two reviews
+
+6
+00:00:24,167 --> 00:00:26,667
+A job is pinned to the release that was active when it started
+Steps show what each waits for and whose output it uses
+
+7
+00:00:26,667 --> 00:00:29,833
+Pause stops new work; anything running settles first
+
+8
+00:00:29,833 --> 00:00:38,833
+Each try shows five separate facts: allowed to run, what the machine saw, model call, result kept, cleanup
+Time compressed 3×
+
+9
+00:00:38,833 --> 00:00:41,833
+Paused: completed work is kept; this job stays on P0
+
+10
+00:00:41,833 --> 00:00:44,100
+Now ask the workbench to improve its own orchestration
+
+11
+00:00:44,100 --> 00:00:48,667
+A plain-language request, bound to the active release and a fixed budget
+
+12
+00:00:48,667 --> 00:00:50,133
+Start: the current release (P0) writes and checks its own successor
+
+13
+00:00:50,133 --> 00:00:51,267
+Every improvement shows where it is: requested, written, checked, published, approved, active
+Codex (mocked) proposes exact file edits · time compressed 8×
+
+14
+00:00:51,267 --> 00:00:56,267
+The first attempt had a real proof error — the fixed verifier rejected it
+Lean's actual diagnostic is shown; no model can override it
+
+15
+00:00:56,267 --> 00:00:56,367
+The diagnostic went back to the author as a recorded new draft; the second attempt is checked
+Sandboxed build, proof replay, protected tests, two independent reviews · time compressed 10×
+
+16
+00:00:56,367 --> 00:01:02,367
+What changes, in plain words: refute no longer waits for reproduce
+No data dependency between them, so both may run at once; both gates are still required
+
+17
+00:01:02,367 --> 00:01:06,700
+Publication waits until every required gate passes
+Time compressed 10×
+
+18
+00:01:06,700 --> 00:01:10,667
+Release P1 was published by the protected kernel. It's waiting for you
+
+19
+00:01:10,667 --> 00:01:15,567
+The decision comes first: the exact release, what it replaces, and the evidence
+Full digests, grouped for reading
+
+20
+00:01:15,567 --> 00:01:23,933
+Each fact keeps its own label. There is no single 'verified' badge
+Model reviews are judgments, not proofs, and here they are marked as mocked
+
+21
+00:01:23,933 --> 00:01:33,000
+Details are one click away: every proof obligation, general or finite, re-checked from scratch
+
+22
+00:01:33,000 --> 00:01:36,000
+Activation never moves existing jobs: they stay on P0 unless explicitly migrated
+
+23
+00:01:36,000 --> 00:01:46,333
+Approve: type the release's first 8 characters and acknowledge the mocked reviews
+Approval binds this exact digest to the current active release
+
+24
+00:01:46,333 --> 00:01:55,533
+Activate is a separate step: a compare-and-swap on the expected active release
+
+25
+00:01:55,533 --> 00:02:02,633
+P1 is now the default for new jobs; the paused job is still pinned to P0
+
+26
+00:02:02,633 --> 00:02:06,533
+A new job runs on P1
+
+27
+00:02:06,533 --> 00:02:09,833
+Build and proof run first…
+Time compressed 10×
+
+28
+00:02:09,833 --> 00:02:14,533
+…then reproduction and refutation run at the same time under P1
+Both publication gates are still mandatory and bound to the same payload
+
+29
+00:02:14,533 --> 00:02:23,100
+Both reviews passed; the summary step combines them
+

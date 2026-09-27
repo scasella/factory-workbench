@@ -1,0 +1,53 @@
+{
+  "recorded": "2026-09-26",
+  "host": {
+    "os": "macOS 27.0 (26A428)",
+    "arch": "arm64",
+    "note": "macOS hosts the required Linux containers via Docker Desktop"
+  },
+  "node": {
+    "version": "25.8.1",
+    "typescript_mode": "strip-types (native)"
+  },
+  "npm_lock": "package-lock.json",
+  "lean": {
+    "toolchain": "leanprover/lean4:v4.34.1",
+    "version": "4.34.1",
+    "commit": "5045d0056413266e57c625dcd7c365b10e377c52",
+    "elan": "4.2.4",
+    "checker": "leanchecker (bundled with toolchain), run as `lake env leanchecker --fresh FactoryBridge`"
+  },
+  "sqlite": {
+    "node_sqlite": "3.51.3 (node:sqlite built-in)",
+    "cli": "3.54.0"
+  },
+  "docker": {
+    "client": "29.8.0",
+    "server": "29.8.0",
+    "server_os_arch": "linux/aarch64"
+  },
+  "codex": {
+    "cli": "codex-cli 0.155.1",
+    "path": "/opt/homebrew/bin/codex",
+    "noninteractive": "codex exec",
+    "exec_flag_rejected": true
+  },
+  "images": {
+    "lean_base": {
+      "ref": "factory-lean-base:v4.34.1",
+      "dockerfile": "protected/runner-profiles/images/lean-base.Dockerfile",
+      "base": "debian:bookworm-slim",
+      "id": "sha256:e8aae6d0354f38220b77d6cb534dc1dc7e290057b283dbdb67f03735d0d2d876"
+    },
+    "verifier": {
+      "ref": "factory-verifier:dev",
+      "dockerfile": "protected/runner-profiles/images/verifier.Dockerfile",
+      "id": "sha256:023a9d824563c91dbd5a0a48dbb69862633cd15db9e0312a5c0bc4c543c2a7b1"
+    }
+  },
+  "npm": {
+    "fastify": "5.12.5",
+    "typescript": "5.9.3",
+    "@types/node": "25.0.3"
+  }
+}

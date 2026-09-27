@@ -1,0 +1,85 @@
+{
+  "note": "Golden vectors: TS canonicalize() and the Lean kernel's canonical re-encoding must produce identical bytes; digests are sha256 of those bytes.",
+  "vectors": [
+    {
+      "name": "sorted_keys_nested",
+      "kind": "workflows",
+      "value": [
+        {
+          "steps": [
+            {
+              "retries": "1",
+              "prompt": "",
+              "inputs": [
+                {
+                  "source": {
+                    "type": "job_input"
+                  },
+                  "name": "candidate"
+                }
+              ],
+              "after": [],
+              "role": "build",
+              "id": "build"
+            }
+          ],
+          "max_parallel": "1",
+          "kind": "package_audit"
+        }
+      ]
+    },
+    {
+      "name": "escapes_and_unicode",
+      "kind": "workflows",
+      "value": [
+        {
+          "kind": "change_author",
+          "max_parallel": "1",
+          "steps": [
+            {
+              "id": "a\"b\\c\n\t\u0001é漢😀",
+              "role": "author",
+              "after": [],
+              "inputs": [],
+              "prompt": "p/q.md",
+              "retries": "0"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "envelope_command",
+      "kind": "envelope",
+      "value": {
+        "tick": "42",
+        "epoch": "3",
+        "command": {
+          "type": "start_attempt",
+          "step": "prove",
+          "job": "j-1",
+          "fingerprint": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+        },
+        "actor": {
+          "type": "coordinator"
+        }
+      }
+    },
+    {
+      "name": "big_natural",
+      "kind": "envelope",
+      "value": {
+        "actor": {
+          "type": "operator",
+          "name": "op"
+        },
+        "epoch": "0",
+        "tick": "18446744073709551615",
+        "command": {
+          "type": "pause_job",
+          "job": "x"
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,22 @@
+[
+  {
+    "name": "sorted_keys_nested",
+    "canonical": "[{\"kind\":\"package_audit\",\"max_parallel\":\"1\",\"steps\":[{\"after\":[],\"id\":\"build\",\"inputs\":[{\"name\":\"candidate\",\"source\":{\"type\":\"job_input\"}}],\"prompt\":\"\",\"retries\":\"1\",\"role\":\"build\"}]}]",
+    "sha256": "6095470898393615bf60fd168f99e4146ea12312e0165e1cb1d957c24c10d838"
+  },
+  {
+    "name": "escapes_and_unicode",
+    "canonical": "[{\"kind\":\"change_author\",\"max_parallel\":\"1\",\"steps\":[{\"after\":[],\"id\":\"a\\\"b\\\\c\\n\\t\\u0001é漢😀\",\"inputs\":[],\"prompt\":\"p/q.md\",\"retries\":\"0\",\"role\":\"author\"}]}]",
+    "sha256": "ad793c07bc21ac9a760efa99e929a726a6a22e4742acf7530765fb4720939467"
+  },
+  {
+    "name": "envelope_command",
+    "canonical": "{\"actor\":{\"type\":\"coordinator\"},\"command\":{\"fingerprint\":\"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\",\"job\":\"j-1\",\"step\":\"prove\",\"type\":\"start_attempt\"},\"epoch\":\"3\",\"tick\":\"42\"}",
+    "sha256": "13b0e1bc031ba9b39ef711b31795c2516119b49c4b53687deb73ba9ccf74dbd6"
+  },
+  {
+    "name": "big_natural",
+    "canonical": "{\"actor\":{\"name\":\"op\",\"type\":\"operator\"},\"command\":{\"job\":\"x\",\"type\":\"pause_job\"},\"epoch\":\"0\",\"tick\":\"18446744073709551615\"}",
+    "sha256": "9f73579b670611f64d887fd5110bcd268e793ebe5eddfe1e576093a22698062d"
+  }
+]

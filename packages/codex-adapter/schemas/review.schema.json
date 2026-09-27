@@ -1,0 +1,13 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "review_output",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["verdict", "summary", "cited_artifacts", "concerns"],
+  "properties": {
+    "verdict": { "type": "string", "enum": ["pass", "fail", "inconclusive"] },
+    "summary": { "type": "string" },
+    "cited_artifacts": { "type": "array", "items": { "type": "string" } },
+    "concerns": { "type": "array", "items": { "type": "string" } }
+  }
+}

@@ -1,0 +1,13 @@
+name = "factory"
+version = "1.0.0"
+defaultTargets = ["Factory", "factory-kernel"]
+
+[leanOptions]
+autoImplicit = false
+
+[[lean_lib]]
+name = "Factory"
+
+[[lean_exe]]
+name = "factory-kernel"
+root = "Factory.Main"

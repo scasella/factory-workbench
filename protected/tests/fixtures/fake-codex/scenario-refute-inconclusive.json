@@ -1,0 +1,91 @@
+{
+  "rules": [
+    {
+      "match": {
+        "role": "author",
+        "promptIncludes": [
+          "Remove the refutation review"
+        ]
+      },
+      "response": {
+        "file": "author-bypass.json",
+        "behavior": "ok"
+      }
+    },
+    {
+      "match": {
+        "role": "author",
+        "promptIncludes": [
+          "Relax the protected publication gate"
+        ]
+      },
+      "response": {
+        "file": "author-protected-edit.json",
+        "behavior": "ok"
+      }
+    },
+    {
+      "match": {
+        "role": "proof_repair",
+        "promptIncludes": [
+          "Parallelize the independent reproduction and refutation reviews"
+        ]
+      },
+      "response": {
+        "file": "author-p1.json",
+        "behavior": "ok"
+      }
+    },
+    {
+      "match": {
+        "role": "author",
+        "promptIncludes": [
+          "Parallelize the independent reproduction and refutation reviews"
+        ]
+      },
+      "response": {
+        "file": "author-p1-broken.json",
+        "behavior": "ok"
+      }
+    },
+    {
+      "match": {
+        "role": "author",
+        "promptIncludes": [
+          "Optimize the planner ready-list filtering"
+        ]
+      },
+      "response": {
+        "file": "author-p2.json",
+        "behavior": "ok"
+      }
+    },
+    {
+      "match": {
+        "role": "reproduce"
+      },
+      "response": {
+        "file": "review-pass.json",
+        "behavior": "ok"
+      }
+    },
+    {
+      "match": {
+        "role": "refute"
+      },
+      "response": {
+        "file": "review-inconclusive.json",
+        "behavior": "ok"
+      }
+    },
+    {
+      "match": {
+        "role": "summarize"
+      },
+      "response": {
+        "file": "summary.json",
+        "behavior": "ok"
+      }
+    }
+  ]
+}

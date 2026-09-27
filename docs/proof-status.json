@@ -1,0 +1,334 @@
+{
+  "generated": "2026-09-27T12:14:29.187Z",
+  "toolchain": "leanprover/lean4:v4.34.1",
+  "properties": [
+    {
+      "id": "K01",
+      "title": "Well-formed state",
+      "definition": "Factory.Contracts.K01",
+      "theorems": [
+        {
+          "name": "Factory.Contracts.initial_safe",
+          "present": true,
+          "axioms": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ],
+          "approved_axioms_only": true
+        },
+        {
+          "name": "Factory.Contracts.apply_preserves",
+          "present": true,
+          "axioms": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ],
+          "approved_axioms_only": true
+        },
+        {
+          "name": "Factory.Contracts.reachable_safe",
+          "present": true,
+          "axioms": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ],
+          "approved_axioms_only": true
+        },
+        {
+          "name": "Factory.Contracts.steps_safe",
+          "present": true,
+          "axioms": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ],
+          "approved_axioms_only": true
+        }
+      ],
+      "status": "proof replay passed"
+    },
+    {
+      "id": "K02",
+      "title": "Single accepted completion",
+      "definition": "Factory.Contracts.K02 + Factory.Contracts.AcceptedStable",
+      "theorems": [
+        {
+          "name": "Factory.Contracts.k02_stable",
+          "present": true,
+          "axioms": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ],
+          "approved_axioms_only": true
+        },
+        {
+          "name": "Factory.Contracts.k02_trace",
+          "present": true,
+          "axioms": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ],
+          "approved_axioms_only": true
+        }
+      ],
+      "status": "proof replay passed"
+    },
+    {
+      "id": "K03",
+      "title": "Fenced results",
+      "definition": "Factory.Contracts.K03 + Factory.Contracts.FencedAcceptance",
+      "theorems": [
+        {
+          "name": "Factory.Contracts.k03_fenced",
+          "present": true,
+          "axioms": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ],
+          "approved_axioms_only": true
+        }
+      ],
+      "status": "proof replay passed"
+    },
+    {
+      "id": "K04",
+      "title": "Dependency/input safety",
+      "definition": "Factory.Contracts.DependencySafe",
+      "theorems": [
+        {
+          "name": "Factory.Contracts.k04_dependency",
+          "present": true,
+          "axioms": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ],
+          "approved_axioms_only": true
+        }
+      ],
+      "status": "proof replay passed"
+    },
+    {
+      "id": "K05",
+      "title": "Cancellation",
+      "definition": "Factory.Contracts.K05 + Factory.Contracts.CancellationFinal",
+      "theorems": [
+        {
+          "name": "Factory.Contracts.k05_final",
+          "present": true,
+          "axioms": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ],
+          "approved_axioms_only": true
+        }
+      ],
+      "status": "proof replay passed"
+    },
+    {
+      "id": "K06",
+      "title": "Required evidence",
+      "definition": "Factory.Contracts.K06 + Factory.Contracts.PublicationGated",
+      "theorems": [
+        {
+          "name": "Factory.Contracts.k06_gated",
+          "present": true,
+          "axioms": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ],
+          "approved_axioms_only": true
+        }
+      ],
+      "status": "proof replay passed"
+    },
+    {
+      "id": "K07",
+      "title": "Release binding",
+      "definition": "Factory.Contracts.K07 + Factory.Contracts.ActivationBound",
+      "theorems": [
+        {
+          "name": "Factory.Contracts.k07_bound",
+          "present": true,
+          "axioms": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ],
+          "approved_axioms_only": true
+        }
+      ],
+      "status": "proof replay passed"
+    },
+    {
+      "id": "K08",
+      "title": "Version pinning",
+      "definition": "Factory.Contracts.PinningPreserved",
+      "theorems": [
+        {
+          "name": "Factory.Contracts.k08_pinning",
+          "present": true,
+          "axioms": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ],
+          "approved_axioms_only": true
+        }
+      ],
+      "status": "proof replay passed"
+    },
+    {
+      "id": "K09",
+      "title": "Migration preservation",
+      "definition": "Factory.Contracts.MigrationPreserving",
+      "theorems": [
+        {
+          "name": "Factory.Contracts.k09_migration",
+          "present": true,
+          "axioms": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ],
+          "approved_axioms_only": true
+        }
+      ],
+      "status": "proof replay passed"
+    },
+    {
+      "id": "K10",
+      "title": "Resource authority",
+      "definition": "Factory.Contracts.K10",
+      "theorems": [
+        {
+          "name": "Factory.Contracts.apply_preserves",
+          "present": true,
+          "axioms": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ],
+          "approved_axioms_only": true
+        }
+      ],
+      "status": "proof replay passed"
+    },
+    {
+      "id": "K11",
+      "title": "Replay determinism (definitional: apply is a pure function)",
+      "definition": "Factory.replay",
+      "theorems": [
+        {
+          "name": "Factory.Contracts.k11_replay_nil",
+          "present": true,
+          "axioms": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ],
+          "approved_axioms_only": true
+        },
+        {
+          "name": "Factory.Contracts.k11_replay_cons_ok",
+          "present": true,
+          "axioms": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ],
+          "approved_axioms_only": true
+        },
+        {
+          "name": "Factory.Contracts.k11_replay_cons_err",
+          "present": true,
+          "axioms": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ],
+          "approved_axioms_only": true
+        },
+        {
+          "name": "Factory.Contracts.k11_replay_append",
+          "present": true,
+          "axioms": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ],
+          "approved_axioms_only": true
+        },
+        {
+          "name": "Factory.Contracts.k11_replay_reachable",
+          "present": true,
+          "axioms": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ],
+          "approved_axioms_only": true
+        }
+      ],
+      "status": "proof replay passed"
+    },
+    {
+      "id": "K12",
+      "title": "Effect causality",
+      "definition": "Factory.Contracts.EffectCausality",
+      "theorems": [
+        {
+          "name": "Factory.Contracts.k12_causality",
+          "present": true,
+          "axioms": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ],
+          "approved_axioms_only": true
+        }
+      ],
+      "status": "proof replay passed"
+    }
+  ],
+  "build": {
+    "ok": true,
+    "tail": [
+      "  String → String.Slice",
+      "instead of",
+      "  String → String",
+      "Build completed successfully (31 jobs).",
+      ""
+    ]
+  },
+  "replay": {
+    "tool": "leanchecker --fresh Factory.Proofs",
+    "ok": true,
+    "tail": [
+      ""
+    ]
+  },
+  "proofs_module_in_library": true,
+  "proofs_build": {
+    "ok": true,
+    "tail": [
+      "warning: Factory/Kernel.lean:193:19: Variable name `s` is not explicitly referenced.",
+      "",
+      "Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:",
+      "  [apply] _s",
+      "",
+      "Note: This linter can be disabled with `set_option linter.unusedVariables false`",
+      "Build completed successfully (16 jobs).",
+      ""
+    ]
+  },
+  "ok": true
+}

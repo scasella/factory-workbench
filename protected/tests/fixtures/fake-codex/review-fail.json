@@ -1,0 +1,8 @@
+{
+  "verdict": "fail",
+  "summary": "FAKE REVIEW: concrete concern found.",
+  "cited_artifacts": [],
+  "concerns": [
+    "planner may dispatch a step whose peer review is still pending"
+  ]
+}

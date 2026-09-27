@@ -1,0 +1,8 @@
+{
+  "summary": "FAKE SUMMARY: machine-checked obligations and review verdicts are listed in the receipts; see release page.",
+  "obligations": [],
+  "reviews": [],
+  "uncertainties": [
+    "inference was mocked (fake Codex)"
+  ]
+}

@@ -1,0 +1,26 @@
+# FIXED build recipe for orchestration packages. Supplied by the protected
+# verifier; candidate packages cannot edit it (not in the materializer allowlist).
+name = "factorypkg"
+defaultTargets = ["factory-package"]
+
+[leanOptions]
+autoImplicit = false
+
+[[require]]
+name = "factory"
+path = "/opt/factory"
+
+[[lean_lib]]
+name = "FactoryPkg"
+globs = ["FactoryPkg.+"]
+
+[[lean_lib]]
+name = "FactoryPrev"
+globs = ["FactoryPrev.+"]
+
+[[lean_lib]]
+name = "FactoryBridge"
+
+[[lean_exe]]
+name = "factory-package"
+root = "FactoryExport"
